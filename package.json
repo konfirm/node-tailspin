@@ -1,0 +1,19 @@
+{
+  "name": "@konfirm/tailspin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "source/tailspin.js",
+  "scripts": {
+    "test": "lab -clr",
+    "test-coverage-html": "lab -clr html -o report.html"
+  },
+  "keywords": [],
+  "author": "Rogier Spieker <rogier+npm@konfirm.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "@konfirm/labrat": "^1.0.1",
+    "code": "^5.1.0",
+    "eslint-config-strict": "^14.0.0",
+    "lab": "^14.3.1"
+  }
+}
