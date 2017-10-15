@@ -47,6 +47,30 @@ class Tail {
 	}
 
 	/**
+	 *  Modify the value of the tail
+	 *
+	 * @param    {any}      value
+	 * @param    {boolean}  [force=false]
+	 * @return   {boolean}  success
+	 * @memberof Tail
+	 */
+	modify(value, force = false) {
+		const { scope, key } = storage.get(this);
+
+		if (this.reachable || force) {
+			if (typeof scope.value !== 'object') {
+				scope.modify({});
+			}
+
+			scope.value[key] = value;
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 *  Obtain the list of types for the constructed tail
 	 *
 	 *  @readonly
