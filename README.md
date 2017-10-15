@@ -1,3 +1,7 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7ec829e8719e4e529c231c04662b3d9d)](https://www.codacy.com/app/konfirm/node-tailspin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=konfirm/node-tailspin&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/konfirm/node-tailspin.svg?branch=master)](https://travis-ci.org/konfirm/node-tailspin)
+
+
 # Tailspin
 Object path accessor. Tests, provides and sets values within objects and arrays.
 
