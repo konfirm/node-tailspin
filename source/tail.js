@@ -58,7 +58,10 @@ class Tail {
 		const { scope, key } = storage.get(this);
 
 		if (this.reachable || force) {
-			if (scope.type !== 'object') {
+			if (scope.type === 'array' && /^-?[0-9]*\.?[0-9]+$/.test(key)) {
+				scope.value[key] = {};
+			}
+			else if (scope.type !== 'object') {
 				scope.modify({});
 			}
 
@@ -78,7 +81,13 @@ class Tail {
 	 *  @return   {String}  type
 	 */
 	get type() {
-		return typeof this.value;
+		const type = typeof this.value;
+
+		if (type === 'object' && Array.isArray(this.value)) {
+			return 'array';
+		}
+
+		return type;
 	}
 
 	/**
@@ -103,7 +112,7 @@ class Tail {
 	 *  @return    {Boolean}  reachable
 	 */
 	get reachable() {
-		const types = /object|undefined/;
+		const types = /object|array|undefined/;
 
 		return this.types.reduce((prev, type, index, all) => prev && (types.test(type) || index + 1 === all.length), true);
 	}

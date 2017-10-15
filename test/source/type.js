@@ -3,7 +3,7 @@
 const tailspin = source('tailspin');
 
 describe('Tailspin provides a list of types', () => {
-	const subject = { foo: { num: 1, bar: { baz: { qux: false } } } };
+	const subject = { foo: { num: 1, bar: { baz: { qux: false } }, arr: [ 1 ] } };
 	const tests = [
 		{ path: 'foo', expect: 'object' },
 		{ path: 'num', expect: 'undefined' },
@@ -14,6 +14,10 @@ describe('Tailspin provides a list of types', () => {
 		{ path: 'foo.num.baz', expect: 'undefined' },
 		{ path: 'foo.bar.baz.qux', expect: 'boolean' },
 		{ path: 'foo.num.baz.qux', expect: 'undefined' },
+		{ path: 'foo.arr.0', expect: 'number' },
+		{ path: 'foo.arr.0.boo', expect: 'undefined' },
+		{ path: 'foo.arr.1', expect: 'undefined' },
+		{ path: 'foo.arr.1.boo', expect: 'undefined' },
 	];
 
 	tests.forEach((test) => {

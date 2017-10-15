@@ -72,5 +72,28 @@ describe('Tailspin modifies values', () => {
 
 		next();
 	});
+
+	it('can change array items', (next) => {
+		const subject = { foo: { arr: [ { aa: { bb: 1 } } ] } };
+		const tail = tailspin(subject, 'foo.arr.0.aa.bb');
+
+		expect(tail.value).to.equal(1);
+		expect(tail.modify(2)).to.equal(true);
+		expect(tail.value).to.equal(2);
+
+		next();
+	});
+
+	it('can add array items', (next) => {
+		const subject = { foo: { arr: [ { aa: { bb: 1 } } ] } };
+		const tail = tailspin(subject, 'foo.arr.1.cc.dd');
+
+		expect(tail.value).to.equal(und);
+		expect(tail.modify(2)).to.equal(true);
+		expect(tail.value).to.equal(2);
+		expect(subject.foo.arr[1]).to.equal({ cc: { dd: 2 } });
+
+		next();
+	});
 });
 
