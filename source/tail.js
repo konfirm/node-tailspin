@@ -50,15 +50,15 @@ class Tail {
 	 *  Modify the value of the tail
 	 *
 	 * @param    {any}      value
-	 * @param    {boolean}  [force=false]
-	 * @return   {boolean}  success
+	 * @param    {Boolean}  [force=false]
+	 * @return   {Boolean}  success
 	 * @memberof Tail
 	 */
 	modify(value, force = false) {
 		const { scope, key } = storage.get(this);
 
 		if (this.reachable || force) {
-			if (typeof scope.value !== 'object') {
+			if (scope.type !== 'object') {
 				scope.modify({});
 			}
 
@@ -71,6 +71,17 @@ class Tail {
 	}
 
 	/**
+	 *  Obtain the type of the tail value
+	 *
+	 *  @readonly
+	 *  @memberof Tail
+	 *  @return   {String}  type
+	 */
+	get type() {
+		return typeof this.value;
+	}
+
+	/**
 	 *  Obtain the list of types for the constructed tail
 	 *
 	 *  @readonly
@@ -80,7 +91,7 @@ class Tail {
 	get types() {
 		const { scope, key } = storage.get(this);
 
-		return key ? scope.types.concat(typeof this.value) : [];
+		return key ? scope.types.concat(this.type) : [];
 	}
 
 	/**
