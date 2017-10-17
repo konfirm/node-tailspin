@@ -1,8 +1,8 @@
+# Tailspin
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7ec829e8719e4e529c231c04662b3d9d)](https://www.codacy.com/app/konfirm/node-tailspin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=konfirm/node-tailspin&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/konfirm/node-tailspin.svg?branch=master)](https://travis-ci.org/konfirm/node-tailspin)
 
-
-# Tailspin
 Object path accessor. Tests, provides and sets values within objects and arrays.
 
 
@@ -13,12 +13,14 @@ $ npm install --save @konfirm/tailspin
 
 
 ## Usage
-Provide an object and a path (as string) to the tailspin module and a new [`Tail`](#tail-api) object is returned.
+Provide an object and a path (as string) to the tailspin module and a new [`Tail`](#tail--api) object is returned.
 
 ```
 const tailspin = require('@konfirm/tailspin');
 const subject = { foo: { bar: { baz: 1 } } };
-const tail = tailspin(subject('foo.bar.baz'));
+const tail = tailspin(subject, 'foo.bar.baz');
+
+console.log(tail.value);  //  1
 ```
 
 ### `tailspin(scope, path)`

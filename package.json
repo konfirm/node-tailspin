@@ -1,13 +1,31 @@
 {
   "name": "@konfirm/tailspin",
   "version": "1.0.0",
-  "description": "",
+  "description": "Object path accessor. Tests, provides and sets values within objects and arrays.",
   "main": "source/tailspin.js",
   "scripts": {
     "test": "lab -clr",
     "test-coverage-html": "lab -clr html -o report.html"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/konfirm/node-tailspin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/konfirm/node-tailspin/issues"
+  },
+  "keywords": [
+    "object",
+    "obj",
+    "nested",
+    "path",
+    "accessor",
+    "access",
+    "dot",
+    "notation",
+    "property",
+    "path"
+  ],
   "author": "Rogier Spieker <rogier+npm@konfirm.io>",
   "license": "MIT",
   "devDependencies": {
