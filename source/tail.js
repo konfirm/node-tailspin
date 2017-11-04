@@ -58,7 +58,7 @@ class Tail {
 		const { scope, key } = storage.get(this);
 
 		if (this.reachable || force) {
-			if (scope.type === 'array' && /^-?[0-9]*\.?[0-9]+$/.test(key)) {
+			if (scope.type === 'array' && /^[0-9]+$/.test(key)) {
 				scope.value[key] = {};
 			}
 			else if (scope.type !== 'object') {
@@ -109,9 +109,18 @@ class Tail {
 	 */
 	get reachable() {
 		const types = /object|array|undefined/;
+		const { key } = storage.get(this);
 
 		return this.types
-			.reduce((prev, type, index, all) => prev && (types.test(type) || index + 1 === all.length), true);
+			.reduce((prev, type, index, all) => {
+				const last = all.length - 1;
+
+				if (prev && (types.test(type) || index === last)) {
+					return !(index === last && index && all[last - 1] === 'array') || /^[0-9]+$/.test(key);
+				}
+
+				return false;
+			}, true);
 	}
 }
 

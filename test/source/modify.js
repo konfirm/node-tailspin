@@ -5,7 +5,7 @@ const tailspin = source('tailspin');
 const und = undefined;
 
 describe('Tailspin modifies values', () => {
-	it('modifies foo.bar.baz.qux', (next) => {
+	it('modifies (bool) foo.bar.baz.qux', (next) => {
 		const subject = { foo: { num: 1, bar: { baz: { qux: false } } } };
 		const tail = tailspin(subject, 'foo.bar.baz.qux');
 
@@ -16,7 +16,7 @@ describe('Tailspin modifies values', () => {
 		next();
 	});
 
-	it('modifies foo.bar.baz', (next) => {
+	it('modifies (object) foo.bar.baz', (next) => {
 		const subject = { foo: { num: 1, bar: { baz: { qux: false } } } };
 		const tail = tailspin(subject, 'foo.bar.baz');
 
@@ -27,7 +27,7 @@ describe('Tailspin modifies values', () => {
 		next();
 	});
 
-	it('modifies foo.num', (next) => {
+	it('modifies (number) foo.num', (next) => {
 		const subject = { foo: { num: 1, bar: { baz: { qux: false } } } };
 		const tail = tailspin(subject, 'foo.num');
 
@@ -38,7 +38,7 @@ describe('Tailspin modifies values', () => {
 		next();
 	});
 
-	it('does not modify foo.num.boo without being forced', (next) => {
+	it('does not modify (unreachable) foo.num.boo without being forced', (next) => {
 		const subject = { foo: { num: 1, bar: { baz: { qux: false } } } };
 		const tail = tailspin(subject, 'foo.num.boo');
 
@@ -49,7 +49,7 @@ describe('Tailspin modifies values', () => {
 		next();
 	});
 
-	it('does modify foo.num.boo when being forced', (next) => {
+	it('does modify (unreachable) foo.num.boo when being forced', (next) => {
 		const subject = { foo: { num: 1, bar: { baz: { qux: false } } } };
 		const tail = tailspin(subject, 'foo.num.boo');
 
@@ -73,7 +73,7 @@ describe('Tailspin modifies values', () => {
 		next();
 	});
 
-	it('can change array items', (next) => {
+	it('can change existing array items', (next) => {
 		const subject = { foo: { arr: [ { aa: { bb: 1 } } ] } };
 		const tail = tailspin(subject, 'foo.arr.0.aa.bb');
 
@@ -92,6 +92,18 @@ describe('Tailspin modifies values', () => {
 		expect(tail.modify(2)).to.equal(true);
 		expect(tail.value).to.equal(2);
 		expect(subject.foo.arr[1]).to.equal({ cc: { dd: 2 } });
+		expect(subject).to.equal({ foo: { arr: [ { aa: { bb: 1 } }, { cc: { dd: 2 } } ] } });
+
+		next();
+	});
+
+	it('cannot add non-numerical keys to arrays itself', (next) => {
+		const subject = { foo: { arr: [ 1, 2 ] } };
+		const tail = tailspin(subject, 'foo.arr.bar');
+
+		expect(tail.value).to.equal(und);
+		expect(tail.modify('baz')).to.equal(false);
+		expect(tail.value).to.equal(und);
 
 		next();
 	});
