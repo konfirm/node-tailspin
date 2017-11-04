@@ -35,8 +35,8 @@ class Tail {
 	 *  Obtain the current value of the Tail
 	 *
 	 *  @readonly
-	 *  @memberof  Tail
 	 *  @return    {*}  value
+	 *  @memberof  Tail
 	 */
 	get value() {
 		const { scope, key } = storage.get(this);
@@ -77,25 +77,21 @@ class Tail {
 	 *  Obtain the type of the tail value
 	 *
 	 *  @readonly
-	 *  @memberof Tail
 	 *  @return   {String}  type
+	 *  @memberof Tail
 	 */
 	get type() {
-		const type = typeof this.value;
+		const { value } = this;
 
-		if (type === 'object' && Array.isArray(this.value)) {
-			return 'array';
-		}
-
-		return type;
+		return Array.isArray(value) ? 'array' : typeof value;
 	}
 
 	/**
 	 *  Obtain the list of types for the constructed tail
 	 *
 	 *  @readonly
-	 *  @memberof  Tail
 	 *  @return    {Array}  types
+	 *  @memberof  Tail
 	 */
 	get types() {
 		const { scope, key } = storage.get(this);
@@ -108,13 +104,14 @@ class Tail {
 	 *  or create
 	 *
 	 *  @readonly
-	 *  @memberof  Tail
 	 *  @return    {Boolean}  reachable
+	 *  @memberof  Tail
 	 */
 	get reachable() {
 		const types = /object|array|undefined/;
 
-		return this.types.reduce((prev, type, index, all) => prev && (types.test(type) || index + 1 === all.length), true);
+		return this.types
+			.reduce((prev, type, index, all) => prev && (types.test(type) || index + 1 === all.length), true);
 	}
 }
 
