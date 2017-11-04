@@ -107,5 +107,16 @@ describe('Tailspin modifies values', () => {
 
 		next();
 	});
+
+	it('treats null as object', (next) => {
+		const subject = { foo: null };
+		const tail = tailspin(subject, 'foo.bar.baz');
+
+		expect(tail.value).to.equal(und);
+		expect(tail.modify('qux')).to.equal(true);
+		expect(tail.value).to.equal('qux');
+
+		next();
+	});
 });
 

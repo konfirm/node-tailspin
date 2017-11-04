@@ -6,6 +6,7 @@ describe('Tailspin checks path reachability', () => {
 	const subject = {
 		foo: { num: 1, bar: { baz: { qux: false } } },
 		arr: [ {}, { a: 1 }, [ 1, 2, [] ] ],
+		non: null,
 	};
 	const tests = [
 		{ path: 'foo', expect: true },
@@ -33,6 +34,8 @@ describe('Tailspin checks path reachability', () => {
 		{ path: 'arr.2.2', expect: true },
 		{ path: 'arr.2.2.key', expect: false },
 		{ path: 'arr.2.2.0', expect: true },
+
+		{ path: 'non.key', expect: true },
 	];
 
 	tests.forEach((test) => {

@@ -43,7 +43,7 @@ class Tail {
 		const target = scope.value;
 
 		//  eslint-disable-next-line no-undefined
-		return typeof target === 'object' && key in target ? target[key] : undefined;
+		return typeof target === 'object' && target && key in target ? target[key] : undefined;
 	}
 
 	/**
@@ -61,7 +61,7 @@ class Tail {
 			if (scope.type === 'array' && /^[0-9]+$/.test(key)) {
 				scope.value[key] = {};
 			}
-			else if (scope.type !== 'object') {
+			else if (scope.type !== 'object' || !scope.value) {
 				scope.modify({});
 			}
 
@@ -108,19 +108,18 @@ class Tail {
 	 *  @memberof  Tail
 	 */
 	get reachable() {
-		const types = /object|array|undefined/;
+		const isScope = /object|array|undefined/;
 		const { key } = storage.get(this);
 
-		return this.types
-			.reduce((prev, type, index, all) => {
-				const last = all.length - 1;
+		return this.types.reduce((prev, type, index, all) => {
+			const last = all.length - 1;
 
-				if (prev && (types.test(type) || index === last)) {
-					return !(index === last && index && all[last - 1] === 'array') || /^[0-9]+$/.test(key);
-				}
+			if (prev && (isScope.test(type) || index === last)) {
+				return !(index === last && index && all[last - 1] === 'array') || /^[0-9]+$/.test(key);
+			}
 
-				return false;
-			}, true);
+			return false;
+		}, true);
 	}
 }
 
