@@ -1,6 +1,6 @@
 {
   "name": "@konfirm/tailspin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Object path accessor. Tests, provides and sets values within objects and arrays.",
   "main": "source/tailspin.js",
   "scripts": {
@@ -26,11 +26,11 @@
     "property",
     "path"
   ],
-	"files": [
-		"source/",
-		"README.md",
-		"LICENSE"
-	],
+  "files": [
+    "source/",
+    "README.md",
+    "LICENSE"
+  ],
   "author": "Rogier Spieker <rogier+npm@konfirm.io>",
   "license": "MIT",
   "devDependencies": {
