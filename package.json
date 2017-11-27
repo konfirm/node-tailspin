@@ -26,6 +26,11 @@
     "property",
     "path"
   ],
+	"files": [
+		"source/",
+		"README.md",
+		"LICENSE"
+	],
   "author": "Rogier Spieker <rogier+npm@konfirm.io>",
   "license": "MIT",
   "devDependencies": {
