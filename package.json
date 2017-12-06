@@ -1,6 +1,6 @@
 {
   "name": "@konfirm/tailspin",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Object path accessor. Tests, provides and sets values within objects and arrays.",
   "main": "source/tailspin.js",
   "scripts": {
