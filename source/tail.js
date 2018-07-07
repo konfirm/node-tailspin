@@ -21,6 +21,17 @@ class Tail {
 	}
 
 	/**
+	 *  Obtain the key name
+	 *
+	 *  @readonly
+	 *  @memberof  Tail
+	 *  @return    {String}  key
+	 */
+	get key() {
+		return storage.get(this).key;
+	}
+
+	/**
 	 *  Obtain the scope Tail
 	 *
 	 *  @readonly
