@@ -2,7 +2,7 @@
 
 const tailspin = source('tailspin');
 
-describe('Tailspin provides a list of types', () => {
+describe('Tailspin provides the type of the tail', () => {
 	const subject = { foo: { num: 1, bar: { baz: { qux: false } }, arr: [ 1 ] } };
 	const tests = [
 		{ path: 'foo', expect: 'object' },
