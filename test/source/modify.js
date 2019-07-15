@@ -104,6 +104,8 @@ describe('Tailspin modifies values', () => {
 		expect(tail.value).to.equal(und);
 		expect(tail.modify('baz')).to.equal(false);
 		expect(tail.value).to.equal(und);
+		expect(tail.modify('baz', true)).to.equal(true);
+		expect(tail.value).to.equal('baz');
 
 		next();
 	});
