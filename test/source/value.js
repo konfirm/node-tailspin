@@ -5,11 +5,14 @@ const tailspin = source('tailspin');
 const und = undefined;
 
 describe('Tailspin gets values', () => {
-	const subject = { foo: {
-		num: 1,
-		bar: { baz: { qux: false } },
-		arr: [ { aa: { bb: 1 } } ],
-	} };
+	const subject = {
+		foo: {
+			num: 1,
+			bar: { baz: { qux: false } },
+			arr: [ { aa: { bb: 1 } } ],
+			not: null,
+		},
+	};
 	const tests = [
 		{ path: 'foo', expect: subject.foo },
 		{ path: 'num', expect: und },
@@ -21,6 +24,7 @@ describe('Tailspin gets values', () => {
 		{ path: 'foo.num.baz.qux', expect: und },
 		{ path: 'foo.arr.0.aa', expect: subject.foo.arr[0].aa },
 		{ path: 'foo.arr.1.aa', expect: und },
+		{ path: 'foo.not', expect: null },
 	];
 
 	tests.forEach((test) => {
